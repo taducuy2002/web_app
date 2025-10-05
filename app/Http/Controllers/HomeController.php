@@ -2,13 +2,48 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Models\Post;
+use App\Models\User;
+use Illuminate\View\View;
+use Carbon\Carbon;
+
 
 class HomeController extends Controller
 {
-    public function index () 
+    public function index(): View
     {
-        return view('client.home.home');
+        $categories = Category::query()
+            ->with(['posts' => function($query) {
+                $query->where('is_published', true)->latest('published_at');
+            }])
+            ->orderBy('name')
+            ->get();
+
+        $latestPosts = Post::query()
+            ->where('is_published', true)
+            ->latest('published_at')
+            ->take(8)
+            ->get();
+
+        // Get statistics
+        $stats = [
+            'topics' => Post::where('is_published', true)->count(),
+            'posts' => Post::where('is_published', true)->count(),
+            'members' => User::count(),
+        ];
+
+        // Get newest member
+        $newestMember = User::latest()->first();
+
+        // Get newest members for sidebar
+        $newestMembers = User::where('created_at', '>=', Carbon::now()->subDays(2))->get();
+
+        $breadcrumbs = [
+            ['label' => 'Trang chủ'],
+        ];
+
+        return view('client.home.home', compact('categories', 'latestPosts', 'stats', 'newestMember', 'newestMembers', 'breadcrumbs'));
     }
 }
+

@@ -1,0 +1,86 @@
+   {{-- Dynamic data injected from database --}}
+    @isset($latestPosts)
+    <div class="block">
+        <div class="block-container">
+            <h3 class="block-header">Bài viết mới</h3>
+            <div class="block-body">
+                @forelse($latestPosts as $post)
+                    <div class="contentRow">
+                        <div class="contentRow-main">
+                            <a href="{{ route('post.show', $post->slug) }}" class="contentRow-title">{{ $post->title }}</a>
+                            <div class="contentRow-lesser">
+                                {{ optional($post->published_at)->format('d/m/Y H:i') }}
+                                • {{ $post->author->name ?? 'Ẩn danh' }}
+                                • {{ $post->category->name ?? 'Khác' }}
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <div class="block-row">Chưa có bài viết.</div>
+                @endforelse
+            </div>
+        </div>
+    </div>
+    @endisset
+
+    @isset($categories)
+        @foreach($categories as $category)
+            <div class="block">
+                <div class="block-container">
+                    <h3 class="block-header">
+                        <a href="{{ route('category.show', $category->slug) }}">{{ $category->name }}</a>
+                    </h3>
+                    <div class="block-body">
+                        @forelse($category->posts->take(5) as $post)
+                            <div class="contentRow">
+                                <div class="contentRow-main">
+                                    <a href="{{ route('post.show', $post->slug) }}" class="contentRow-title">{{ $post->title }}</a>
+                                    <div class="contentRow-lesser">
+                                        {{ optional($post->published_at)->format('d/m/Y') }}
+                                        • {{ $post->author->name ?? 'Ẩn danh' }}
+                                    </div>
+                                </div>
+                            </div>
+                        @empty
+                            <div class="block-row">Chưa có bài viết trong chuyên mục này.</div>
+                        @endforelse
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    @endisset
+
+    <div class="block">
+        <div class="block-container">
+            <h3 class="block-header">Thống kê</h3>
+            <div class="block-body">
+                <div class="block-row">Chủ đề: {{ number_format($stats['topics'] ?? 0) }}</div>
+                <div class="block-row">Bài viết: {{ number_format($stats['posts'] ?? 0) }}</div>
+                <div class="block-row">Thành viên: {{ number_format($stats['members'] ?? 0) }}</div>
+            </div>
+        </div>
+    </div>
+
+    @isset($newestMember)
+    <div class="block">
+        <div class="block-container">
+            <h3 class="block-header">Thành viên mới</h3>
+            <div class="block-body">
+                <div class="block-row">{{ $newestMember->name }}</div>
+            </div>
+        </div>
+    </div>
+    @endisset
+
+    @isset($newestMembers)
+    <div class="block">
+        <div class="block-container">
+            <h3 class="block-header">Thành viên vừa tham gia</h3>
+            <div class="block-body">
+                @foreach($newestMembers as $m)
+                    <div class="block-row">{{ $m->name }}</div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+    @endisset
