@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\DasbostController as AdminDasbostController;
 use App\Http\Controllers\Admin\PostController as AdminPostController;
 use App\Http\Controllers\Admin\AttachmentController as AdminAttachmentController;
 use App\Http\Controllers\ThemeController;
@@ -36,6 +37,10 @@ Route::get('/post/{slug}', [PostController::class, 'show'])->name('post.show');
 Route::post('/post/{postId}/comments', [PostController::class, 'storeComment'])->name('post.comment.store');
 Route::get('/download/{attachmentId}', [PostController::class, 'downloadAttachment'])->name('attachment.download');
 
+
+// client
+Route::get('/detail', [HomeController::class, 'detail'])->name('detail');
+
 // Auth routes
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register.show');
 Route::post('/register', [AuthController::class, 'register'])->name('register.perform');
@@ -46,12 +51,30 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 Route::middleware(['auth','admin'])->group(function () {
+   
     Route::prefix('admin')->group(function () {
-    // Route::get('/ad', [AdminPostController::class, 'index'])->name('dashboard');
-    Route::resource('categories', AdminCategoryController::class);
-    Route::get('/', [AdminPostController::class, 'index'])->name('admin.post');
-    Route::post('attachments/{post}', [AdminAttachmentController::class, 'store'])->name('attachments.store');
-    Route::delete('attachments/{attachment}', [AdminAttachmentController::class, 'destroy'])->name('attachments.destroy');
+  
+     Route::get('/', [AdminDasbostController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/post', [AdminPostController::class, 'index'])->name('admin.post');
+   
+    // Thêm mới post
+    Route::get('/post/add', [AdminPostController::class, 'create'])->name('create.post');
+    Route::post('/post/store', [AdminPostController::class, 'store'])->name('store.post');
+
+    // Sửa post
+    Route::get('/edit/{id}', [AdminPostController::class, 'edit'])->name('admin.edit');
+    Route::post('/update/{id}', [AdminPostController::class, 'update'])->name('admin.update');
+    
+    // Xóa 
+    Route::delete('/destroy/{id}', [AdminPostController::class, 'delete'])->name('admin.delete');
+
+
+    // Tài khoản
+    Route::get('/user', [AdminUserController::class, 'index'])->name('admin.user');
+    Route::delete('/delete/{id}', [AdminUserController::class, 'delete'])->name('user.delete');
+    Route::post('/admin/users/{user}/upgrade', [AdminUserController::class, 'upgrade'])->name('users.upgrade');
+    Route::post('/admin/users/{user}/upgrade-admin', [AdminUserController::class, 'upgradeAdmin'])->name('users.admin');
+
     }) ;
 }) ;
     

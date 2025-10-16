@@ -15,36 +15,39 @@ class PostController extends Controller
 {
 	public function index(): View
 	{
-		$posts = Post::query()
-			->with(['category', 'author'])
-			->where('is_published', true)
-			->latest('published_at')
-			->paginate(12);
+		// $posts = Post::query()
+		// 	->with(['category', 'author'])
+		// 	->where('is_published', true)
+		// 	->latest('published_at')
+		// 	->paginate(12);
+         
+		$posts = Post::orderBy('create_at', 'desc')->limit(8)->get();
+		
 
-		$categories = Category::query()->orderBy('name')->get();
-		$latestPosts = Post::query()->where('is_published', true)->latest('published_at')->take(8)->get();
-		$latestActivity = Post::query()->where('is_published', true)->latest('updated_at')->take(8)->get();
-		$topAuthors = \App\Models\User::query()
-			->withCount(['posts' => function($q){ $q->where('is_published', true); }])
-			->orderByDesc('posts_count')
-			->take(8)
-			->get();
-		$breadcrumbs = [
-			['label' => 'Trang chủ', 'url' => route('home')],
-			['label' => 'Bài viết mới nhất'],
-		];
+		// $categories = Category::query()->orderBy('name')->get();
+		// $latestPosts = Post::query()->where('is_published', true)->latest('published_at')->take(8)->get();
+		// $latestActivity = Post::query()->where('is_published', true)->latest('updated_at')->take(8)->get();
+		// $topAuthors = \App\Models\User::query()
+		// 	->withCount(['posts' => function($q){ $q->where('is_published', true); }])
+		// 	->orderByDesc('posts_count')
+		// 	->take(8)
+		// 	->get();
+		// $breadcrumbs = [
+		// 	['label' => 'Trang chủ', 'url' => route('home')],
+		// 	['label' => 'Bài viết mới nhất'],
+		// ];
 
-		// Get statistics
-		$stats = [
-			'topics' => Post::where('is_published', true)->count(),
-			'posts' => Post::where('is_published', true)->count(),
-			'members' => \App\Models\User::count(),
-		];
+		// // Get statistics
+		// $stats = [
+		// 	'topics' => Post::where('is_published', true)->count(),
+		// 	'posts' => Post::where('is_published', true)->count(),
+		// 	'members' => \App\Models\User::count(),
+		// ];
 
-		// Get newest member
-		$newestMember = \App\Models\User::latest()->first();
+		// // Get newest member
+		// $newestMember = \App\Models\User::latest()->first();
 
-		return view('posts.index', compact('posts', 'categories', 'latestPosts', 'latestActivity', 'topAuthors', 'breadcrumbs', 'stats', 'newestMember'));
+		return view('client.home.home', compact('posts'));
 	}
 
 	public function category(string $slug): View
@@ -193,6 +196,11 @@ class PostController extends Controller
 			'stats' => $stats,
 			'newestMember' => $newestMember,
 		]);
+	}
+
+	// Thêm mới 
+	public function form () {
+		
 	}
 }
 

@@ -1,59 +1,85 @@
 @extends('admin.layout')
 
-@section('title', 'Sửa bài viết')
+@section('title', 'Thêm bài viết')
 
 @section('content')
-    <form method="post" action="{{ route('admin.posts.update', $post) }}">
-        @csrf
-        @method('PUT')
-        <label>Tiêu đề
-            <input type="text" name="title" value="{{ old('title', $post->title) }}" required>
-        </label>
-        <label>Slug
-            <input type="text" name="slug" value="{{ old('slug', $post->slug) }}" required>
-        </label>
-        <label>Danh mục
-            <select name="category_id">
-                <option value="">-- Chọn --</option>
-                @foreach($categories as $c)
-                    <option value="{{ $c->id }}" @selected($post->category_id==$c->id)>{{ $c->name }}</option>
-                @endforeach
-            </select>
-        </label>
-        <label>Tóm tắt
-            <textarea name="excerpt">{{ old('excerpt', $post->excerpt) }}</textarea>
-        </label>
-        <label>Nội dung
-            <textarea name="content" rows="8">{{ old('content', $post->content) }}</textarea>
-        </label>
-        <label>
-            <input type="checkbox" name="is_published" value="1" @checked($post->is_published)> Xuất bản
-        </label>
-        <label>Ngày đăng
-            <input type="datetime-local" name="published_at" value="{{ old('published_at', optional($post->published_at)->format('Y-m-d\TH:i')) }}">
-        </label>
-        <button type="submit">Cập nhật</button>
-    </form>
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">Thêm bài viết</h5>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="{{ route('admin.update', $posts->id) }}" enctype="multipart/form-data">
+                @csrf
+                
+                {{-- Tiêu đề --}}
+                <div class="mb-3">
+                    <label for="title" class="form-label">Tiêu đề <span class="text-danger">*</span></label>
+                    <input type="text" id="title" name="title" 
+                           class="form-control @error('title') is-invalid @enderror" 
+                           value="{{ old('title', $posts->title) }}">
+                    @error('title')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
 
-    <h3>Tệp đính kèm</h3>
-    <form method="post" action="{{ route('admin.attachments.store', $post) }}" enctype="multipart/form-data">
-        @csrf
-        <input type="file" name="file" required>
-        <button type="submit">Tải lên</button>
-    </form>
-    <ul>
-        @foreach($post->attachments as $file)
-            <li>
-                {{ $file->file_name }} ({{ number_format($file->file_size/1024,0) }} KB)
-                <form method="post" action="{{ route('admin.attachments.destroy', $file) }}" style="display:inline">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit">Xóa</button>
-                </form>
-            </li>
-        @endforeach
-    </ul>
+                {{-- Slug --}}
+                <div class="mb-3">
+                    <label for="slug" class="form-label">Slug</label>
+                    <input type="text" id="slug" name="slug" 
+                           class="form-control" value="{{ old('slug' , $posts->slug) }}">
+                </div>
+
+               
+
+                {{-- Ảnh đại diện --}}
+                <div class="mb-3">
+                    <label for="image" class="form-label">Ảnh đại diện</label>
+                    <input type="file" id="image" name="image" class="form-control" accept="image/*">
+                    <div class= "mt-2">
+                        @if($posts->image) 
+                            <img src="{{asset('storage/' . $posts->image)}}" alt="" srcset="" width = "100px">
+                        
+                        @endif
+                    </div>
+                </div>
+
+                {{-- Tóm tắt --}}
+                <div class="mb-3">
+                    <label for="excerpt" class="form-label">Tóm tắt</label>
+                    <textarea id="excerpt" name="excerpt" class="form-control" rows="3">{{ old('excerpt',$posts->excerpt) }}</textarea>
+                </div>
+
+                {{-- Nội dung --}}
+                <div class="mb-3">
+                    <label for="content" class="form-label">Nội dung</label>
+                    <textarea id="content" name="content" class="form-control" rows="8">{{ old('content', $posts->content) }}</textarea>
+                </div>
+
+                {{-- Xuất bản --}}
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" id="is_published" name="is_published" value="1" checked>
+                    <label class="form-check-label" for="is_published">
+                        Xuất bản ngay
+                    </label>
+                </div>
+
+                {{-- Ngày đăng --}}
+                <div class="mb-3">
+                    <label for="published_at" class="form-label">Ngày đăng</label>
+                    <input type="datetime-local" id="published_at" name="published_at" 
+                           class="form-control"
+                           value="{{ old('published_at', now()->format('Y-m-d\TH:i')) }}">
+                </div>
+
+                {{-- Nút lưu --}}
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-success px-4">
+                        <i class="bi bi-save me-1"></i> Lưu bài viết
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 @endsection
-
-
-

@@ -48,4 +48,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
+    public function isVip()
+{
+    return $this->account_level === 'vip';
+}
+
+public function isPremium()
+{
+    return $this->account_level === '';
+}
+
 }

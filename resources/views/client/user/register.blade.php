@@ -32,6 +32,10 @@
 				<label for="password_confirmation">Nhập lại mật khẩu</label>
 				<input id="password_confirmation" type="password" name="password_confirmation" class="input" required />
 			</div>
+			 <!-- <label>
+        <input type="checkbox" name="is_admin" value="1">
+        Đăng ký làm Admin
+    </label> -->
 			<div class="form-group">
 				<button type="submit" class="button button--primary">Đăng ký</button>
 			</div>

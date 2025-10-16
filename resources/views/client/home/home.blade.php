@@ -10,12 +10,12 @@
 	
 <div id="fb-root"></div>
 
-<div class="p-pageWrapper" id="top">
+<div class="p-pageWrapper" id="top" >
 
 
 
-<header class="p-header" id="header">
-	<div class="p-header-inner">
+<header class="p-header" id="header" >
+	<div class="p-header-inner" >
 		<div class="p-header-content">
 
 			<div class="p-header-logo p-header-logo--image">
@@ -77,60 +77,13 @@
 
 			
 	
-	<a href="ewr-porta/index.html"
-		class="p-navEl-link p-navEl-link--splitMenu "
-		
-		
-		data-nav-id="EWRporta">Home</a>
-
-
-			<a data-xf-key="1"
-				data-xf-click="menu"
-				data-menu-pos-ref="< .p-navEl"
-				class="p-navEl-splitTrigger"
-				role="button"
-				tabindex="0"
-				aria-label="Toggle expanded"
-				aria-expanded="false"
-				aria-haspopup="true"></a>
-
-		
+	
+			
 		
 			<div class="menu menu--structural" data-menu="menu" aria-hidden="true">
 				<div class="menu-content">
 					
-						
 	
-	
-	<a href="whats-new/index.html"
-		class="menu-linkRow u-indentDepth0 js-offCanvasCopy "
-		
-		
-		data-nav-id="EWRporta_whatsnaw">What's new</a>
-
-	
-
-					
-						
-	
-	
-	<a href="whats-new/latest-activity.html"
-		class="menu-linkRow u-indentDepth0 js-offCanvasCopy "
-		 rel="nofollow"
-		
-		data-nav-id="EWRporta_latest">Latest activity</a>
-
-	
-
-					
-						
-	
-	
-	<a href="ewr-porta/authors/index.html"
-		class="menu-linkRow u-indentDepth0 js-offCanvasCopy "
-		
-		
-		data-nav-id="EWRporta_authors">Authors</a>
 
 	
 
@@ -149,7 +102,7 @@
 
 			
 	
-	<a href="index.html"
+	<a href="{{route('home')}}"
 		class="p-navEl-link "
 		
 		data-xf-key="2"
@@ -668,7 +621,8 @@
 	
 	
 	
-	<div class="block">
+	@foreach ($posts as $pot)
+<div class="block">
 		<div class="porta-articles-widget block-container">
 			
 			<ul class="block-body"  data-widget-id="17" data-widget-key="HOME" data-widget-definition="EWRporta_articles">
@@ -677,20 +631,20 @@
 						<li>
 		<li class="block-row porta-article-item">
 		<article class="porta-article-container">
-			<a href="threads/backdrop-trang-tri-dai-hoi-dang-bo-nam-2025-2030.16210/index.html" class="v-grid">
+			<a href="{{route('detail')}}" class="v-grid">
 				<div class="--figure">
 					
-						<div class="---thumb" style="background-image: url('css/data/attachments/28/28785-c49c0617c18833dd0380c3e8dc744c1b.jpg');background-size: cover;background-position: center center;">
-							<img src="css/data/attachments/28/28785-c49c0617c18833dd0380c3e8dc744c1b.jpg">
+						<div class="---thumb" style="background-image: url('{{Storage::url($pot->image)}}');background-size: cover;background-position: center center;">
+							<img src="">
 						</div>
 					
 				</div>
 				<div class="--main">
 					<h3 class="---title">
 						
-						Backdrop trang trí Đại hội Đảng bộ năm 2025-2030
+						{{$pot->title}}
 					</h3>
-					<div class="bbWrapper">Vector backdrop sân khấu trang trí khánh tiết Đại hội Đảng bộ Phường năm 2025-2030 #2 tải về file định dạng coreldraw x7   Download:   File corel x7: Google Drive Tải nhanh Dự phòng   File PDF...</div>
+					<div class="bbWrapper">{{$pot->content}}</div>
 					<ul class="---meta listInline listInline--bullet contentRow-minor">
 						<li>
 							<i class="fa--xf far fa-user" aria-hidden="true"></i>
@@ -711,6 +665,7 @@
 		</div>
 	</div>
 
+	@endforeach
 
 <div class="sectionMain" id="VNXF_Stats">
 	<div class="blockbody">

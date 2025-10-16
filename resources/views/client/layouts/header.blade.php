@@ -47,6 +47,7 @@
 		.blockbody .VNXF_Stats:nth-child(1n+1) {
 			clear: left;
 		}
+		
 	</style>
 
 	<!-- JS -->
@@ -77,6 +78,7 @@
 			-ms-user-select: none;
 			-o-user-select: none;
 			user-select: none;
+			
 		}
 	</style>
 

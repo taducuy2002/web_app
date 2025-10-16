@@ -7,6 +7,7 @@
     <link rel="shortcut icon" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSIeYl6yCxRZijR5324jESroDuyH0vIqlKHw&s" type="image/x-icon">
 </head>
 <body>
+    
     @include ('client.layouts.header')
      @yield('content')
     @include ('client.layouts.footer')

@@ -11,10 +11,13 @@ class Category extends Model
 	use HasFactory;
 
 	protected $fillable = [
-		'name',
-		'slug',
-		'description',
-	];
+    'title',
+    'slug',
+    'excerpt',
+    'content',
+    'image',
+    'description',
+];
 
 	public function posts(): HasMany
 	{

@@ -42,8 +42,12 @@ class HomeController extends Controller
         $breadcrumbs = [
             ['label' => 'Trang chủ'],
         ];
+        $posts = Post::query()->paginate(8);
+        return view('client.home.home', compact('posts','categories', 'latestPosts', 'stats', 'newestMember', 'newestMembers', 'breadcrumbs'));
+    }
 
-        return view('client.home.home', compact('categories', 'latestPosts', 'stats', 'newestMember', 'newestMembers', 'breadcrumbs'));
+    public function detail(){
+    return view('client.Home.Detail');
     }
 }
 
