@@ -628,7 +628,7 @@
 			<ul class="block-body"  data-widget-id="17" data-widget-key="HOME" data-widget-definition="EWRporta_articles">
 			
 					<ul class="---meta listInline listInline--bullet contentRow-minor">
-						<li>
+					
 		<li class="block-row porta-article-item">
 		<article class="porta-article-container">
 			<a href="{{route('detail')}}" class="v-grid">
@@ -652,9 +652,9 @@
 						</li>
 						<li>
 							<i class="fa--xf far fa-clock" aria-hidden="true"></i>
-							<time  class="u-dt" dir="auto" datetime="2025-08-04T13:57:00+0700" data-time="1754290620" data-date-string="04/08/2025" data-time-string="13:57" title="04/08/2025 lúc 13:57" data-full-old-date="true">04/08/2025</time>
+							<time  class="u-dt" dir="auto" datetime="2025-08-04T13:57:00+0700" data-time="1754290620" data-date-string="04/08/2025" data-time-string="13:57" title="04/08/2025 lúc 13:57" data-full-old-date="true">{{$pot->created_at}}</time>
 						</li>
-						<li>2.200 Lượt xem</li>
+						<li>{{$pot->views}} Lượt xem</li>
 						
 					</ul>
 				</div>
@@ -666,6 +666,7 @@
 	</div>
 
 	@endforeach
+	
 
 <div class="sectionMain" id="VNXF_Stats">
 	<div class="blockbody">
@@ -676,25 +677,24 @@
 				<div class="blocksubhead" align="left">
 					<img src="{{asset('css/styles/VNXF/Statistics/comment.png')}}" border="0"><b>Bài viết mới</b>
 				</div>
-				
-					<div class="rows bold" style="
-    padding: 1px 0;
-    border-top: 1px solid rgb(86 86 86);
-">
+				@foreach ($posts_create_at as $post)
+                  	<div class="rows bold" style=" padding: 1px 0;border-top: 1px solid rgb(86 86 86);">
 	
-						<div class="thumb" style="
-    margin-left: 7px;
-">
+						<div class="thumb" style=" margin-left: 7px;">
 			
-							<img src="favicon.ico" onError="this.onerror=null;this.src='styles/VNXF/Statistics/lastpost.gif';" align="absmiddle" border="0" style="width: 80%;">
+							<img src="{{asset('storage/'. $post->image)}}" onError="this.onerror=null;this.src='styles/VNXF/Statistics/lastpost.gif';" align="absmiddle" border="0" style="width: 80%;">
 						</div>
-						<a class="PreviewTooltip" data-previewurl="/threads/market-festival-tinh-hoa-tay-bac-phu-tho.16679/preview" title="Posted by: vipcorel.com | Last post by: vipcorel.com | Replies: 0 | Views: 58 | Attachment: " href="threads/market-festival-tinh-hoa-tay-bac-phu-tho.16679/index.html">Market Festival tinh hoa Tây Bắc - Phú Thọ</a>
+						<a class="PreviewTooltip" data-previewurl="/threads/market-festival-tinh-hoa-tay-bac-phu-tho.16679/preview" title="Posted by: vipcorel.com | Last post by: vipcorel.com | Replies: 0 | Views: 58 | Attachment: " href="h-hoa-tay-bac-phu-tho.16679/index.html">{{$post->title}}</a>
 					</div>
+					@endforeach
 			</div>
+			
+				
 	  	
 		
 	  	
         <div style="clear:both"></div>
+			
 	</div>
 </div>
 
@@ -816,134 +816,7 @@
 	</div>
 
 
-//  Phần cắt 	
-	
-	<div class="block block--category block--category127">
-		<span class="u-anchorTarget" id="chu-de-tranh.127"></span>
-		<div class="block-container">
-			<h2 class="block-header">
-				<a href="index.html#chu-de-tranh.127">CHỦ ĐỀ TRANH</a>
-				
-			</h2>
-			<div class="block-body">
-				
-	
-	
-		
-	
-	
-	
-		
-	
-// căt 2
 
-	
-
-	<div class="node node--id8 node--depth2 node--forum node--read">
-		<div class="node-body">
-			<span class="node-icon" aria-hidden="true">
-				<i class="fa--xf far fa-comments" aria-hidden="true"></i>
-			</span>
-			<div class="node-main js-nodeMain">
-				
-
-				
-				<h3 class="node-title">
-					<a href="forums/tranh-dong-luc-treo-tuong.8/index.html" data-xf-init="element-tooltip" data-shortcut="node-description">TRANH ĐỘNG LỰC TREO TƯỜNG</a>
-				</h3>
-				
-
-				<div class="node-meta">
-					
-						<div class="node-statsMeta">
-							<dl class="pairs pairs--inline">
-								<dt>Chủ đề</dt>
-								<dd>484</dd>
-							</dl>
-							<dl class="pairs pairs--inline">
-								<dt>Bài viết</dt>
-								<dd>486</dd>
-							</dl>
-						</div>
-					
-
-					
-						
-	
-	
-
-					
-				</div>
-
-				
-
-				
-			</div>
-
-			
-				<div class="node-stats">
-					<dl class="pairs pairs--rows">
-						<dt>Chủ đề</dt>
-						<dd>484</dd>
-					</dl>
-					<dl class="pairs pairs--rows">
-						<dt>Bài viết</dt>
-						<dd>486</dd>
-					</dl>
-				</div>
-			
-
-			<div class="node-extra">
-				
-					<div class="node-extra-icon">
-
-
-
-<div class="threadThumbnailWrapper" id="thread-thumbnail-7081">
-    
-        
-        
-            
-            
-	
-						
-							<a href="members/quang-cao-cuong-ngan.29696/index.html" class="avatar avatar--xs avatar--default avatar--default--dynamic" data-user-id="29696" data-xf-init="member-tooltip" style="background-color: #5233cc; color: #cbc2f0">
-			<span class="avatar-u29696-s" role="img" aria-label="Quảng Cáo Cường Ngân">Q</span> 
-		</a>
-						
-					
-
-            
-    
-</div>
-
-</div>
-					<div class="node-extra-row">
-						
-							<a href="threads/tong-hop-tranh-treo-tuong-quan-tra-sua-file-pdf.7081/%23post-14403.html" class="node-extra-title" title="Tổng hợp tranh treo tường quán trà sữa file PDF">Tổng hợp tranh treo tường quán trà sữa file PDF</a>
-						
-					</div>
-					<div class="node-extra-row">
-						<ul class="listInline listInline--bullet">
-							<li><time  class="node-extra-date u-dt" dir="auto" datetime="2024-11-30T11:54:10+0700" data-time="1732942450" data-date-string="30/11/2024" data-time-string="11:54" title="30/11/2024 lúc 11:54">30/11/2024</time></li>
-							
-								<li class="node-extra-user"><a href="members/quang-cao-cuong-ngan.29696/index.html" class="username " dir="auto" itemprop="name" data-user-id="29696" data-xf-init="member-tooltip">Quảng Cáo Cường Ngân</a></li>
-							
-						</ul>
-					</div>
-				
-			</div>
-		</div>
-	</div>
-
-	/// Hết
-
-	
-			</div>
-		</div>
-	</div>
-
-	
 
 	
 
@@ -1021,23 +894,23 @@
 			
 			<ul class="block-body"  data-widget-id="17" data-widget-key="HOME" data-widget-definition="EWRporta_articles">
 
-// cắt 3
-				<li class="block-row porta-article-item">
+				@foreach ($posts_random as $posts_random)
+               <li class="block-row porta-article-item">
 		<article class="porta-article-container">
 			<a href="threads/bang-ron-kinh-mung-dai-le-vu-lan-2025-file-corel.16632/index.html" class="v-grid">
 				<div class="--figure">
 					
-						<div class="---thumb" style="background-image: url('css/data/attachments/29/29488-e196f004d7fd74207bbc807e316eca67.jpg');background-size: cover;background-position: center center;">
-							<img src="data/attachments/29/29488-e196f004d7fd74207bbc807e316eca67.jpg">
+						<div class="---thumb" style="background-image: url('{{asset('storage/' . $posts_random->image)}}');background-size: cover;background-position: center center;">
+							<img src="{{asset('storage/' . $posts_random->image)}}">
 						</div>
 					
 				</div>
 				<div class="--main">
 					<h3 class="---title">
 						
-						Băng rôn Kính mừng đại lễ Vu Lan 2025 file corel
+						{{$posts_random -> title}}
 					</h3>
-					<div class="bbWrapper">Băng rôn Kính mừng đại lễ Vu Lan báo hiếu 2025 file coreldraw x7     Vu lan yêu thương cùng khắp biến ơn vạn loài     bông hồng cài áo cảm niệm vu lan     Download:   File corel x7: Google Drive...</div>
+					<div class="bbWrapper">{{$posts_random->content}}</div>
 					<ul class="---meta listInline listInline--bullet contentRow-minor">
 						<li>
 							<i class="fa--xf far fa-user" aria-hidden="true"></i>
@@ -1054,8 +927,8 @@
 			</a>
 		</article>
 	</li>
+				@endforeach
 
-// end cắt 3
 			</ul>
 		</div>
 	</div>
@@ -1067,16 +940,12 @@
 				<h3 class="block-minorHeader">
 					<a href="whats-new/posts/indexc806.html?skip=1" rel="nofollow">Bài mới nhất</a>
 				</h3>
+				@foreach($posts_create_at as $posts_create_at)
 				<ul class="block-body">
 					
 
-// Cắt 4
-							
-						
-							
-						
-						
-							<li class="block-row">
+        
+       	<li class="block-row">
 								
 	<div class="contentRow">
 		<div class="contentRow-figure">
@@ -1087,7 +956,7 @@
         
         
             <a href="members/vipcorel-com.1/index.html" class="avatar avatar--xxs" data-user-id="1" data-xf-init="member-tooltip">
-			<img src="data/avatars/s/0/17f94.jpg?1750068560"  alt="vipcorel.com" class="avatar-u1-s" width="48" height="48" loading="lazy" /> 
+			<img src="{{asset('storage/' . $posts_create_at->image)}}"  alt="vipcorel.com" class="avatar-u1-s" width="48" height="48" loading="lazy" /> 
 		</a>
             
         
@@ -1097,7 +966,7 @@
 </div>
 		<div class="contentRow-main contentRow-main--close">
 			
-				<a href="threads/vector-gia-dinh-file-thiet-ke-corel.16675/%23post-16851.html">Vector gia đình file thiết kế corel</a>
+				<a href="threads/vector-gia-dinh-file-thiet-ke-corel.16675/%23post-16851.html">{{$posts_create_at->title}}</a>
 			
 
 			<div class="contentRow-minor contentRow-minor--hideLinks">
@@ -1116,43 +985,15 @@
 						
 					
 				</ul>
+					@endforeach
 			
 		</div>
 	</div>
 
-
 	
 	
-// cắt 5
 
-
-<div class="block" data-widget-id="9" data-widget-key="forum_overview_forum_statistics" data-widget-definition="forum_statistics">
-	<div class="block-container">
-		<h3 class="block-minorHeader">Thống kê diễn đàn</h3>
-		<div class="block-body block-row">
-			<dl class="pairs pairs--justified">
-				<dt>Chủ đề</dt>
-				<dd>16.651</dd>
-			</dl>
-
-			<dl class="pairs pairs--justified">
-				<dt>Bài viết</dt>
-				<dd>16.803</dd>
-			</dl>
-
-			<dl class="pairs pairs--justified">
-				<dt>Thành viên</dt>
-				<dd>10.042</dd>
-			</dl>
-
-			<dl class="pairs pairs--justified">
-				<dt>Thành viên mới nhất</dt>
-				<dd><a href="members/thaivanthinh-adv.42456/index.html" class="username " dir="auto" itemprop="name" data-user-id="42456" data-xf-init="member-tooltip">thaivanthinh.adv</a></dd>
-			</dl>
-		</div>
-	</div>
-</div>
-					
+			
 					
 				</div>
 			

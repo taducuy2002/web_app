@@ -43,9 +43,24 @@ class HomeController extends Controller
             ['label' => 'Trang chủ'],
         ];
         $posts = Post::query()->paginate(8);
-        return view('client.home.home', compact('posts','categories', 'latestPosts', 'stats', 'newestMember', 'newestMembers', 'breadcrumbs'));
+         // Bài viết mới nhất
+        $posts_create_at = Post::orderBy('created_at', 'desc')->take(10)->get();
+        // bài viết ngẫu nhiên
+         $posts_random = Post::inRandomOrder()->take(10)->get();
+        return view('client.home.home', compact('posts','categories', 'latestPosts', 'stats', 'newestMember', 'newestMembers', 'breadcrumbs','posts_create_at','posts_random'));
     }
 
+    // Bài viết mới
+    public function getPost() {
+        $posts = Post::orderBy('create_at', 'desc')->take(10)->get();
+        return view('client.Home.home', compact('posts'));
+    }
+ 
+    // Hiện ngẫu nhiên
+      public function p() {
+        $posts = Post::orderBy('create_at', 'desc')->take(10)->get();
+        return view('client.Home.home', compact('posts'));
+    }
     public function detail(){
     return view('client.Home.Detail');
     }

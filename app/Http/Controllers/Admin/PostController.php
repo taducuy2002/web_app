@@ -60,35 +60,47 @@ class PostController extends Controller
         return view ('admin.posts.edit', compact('posts'));
     }
 
-    public function update(Request $request,  $id) {
-        $posts_update = Post::findOrFail($id);
-        $request -> validate([
-            'title' => 'required',
-        ],
-        
-        [
-            'tile.required' => 'Không được để chống'
-        ]);
+  public function update(Request $request, $id)
+{
+    $post = Post::findOrFail($id);
 
-        // Up ảnh mới
-        if($request->hasFile('image')) {
-            // xóa ảnh cũ
-            if($posts_update->image && Storage::disk('public')->exists($posts_update->image)) {
-                Storage::disk('public')->delete($posts_update->image);
-            }
+    // ✅ Sửa lỗi chính tả 'tile' → 'title'
+    $request->validate([
+        'title' => 'required',
+    ], [
+        'title.required' => 'Không được để trống',
+    ]);
 
-            // Lưu ảnh mới
-            $imagePath = $request->file('image')->store('images', 'public');
+    // ✅ Giữ nguyên đường dẫn ảnh cũ nếu không upload mới
+    $imagePath = $post->image;
 
-            $posts_update->image = $imagePath;
+    // ✅ Nếu có upload ảnh mới
+    if ($request->hasFile('image')) {
+        // Xóa ảnh cũ nếu tồn tại
+        if ($post->image && Storage::disk('public')->exists($post->image)) {
+            Storage::disk('public')->delete($post->image);
         }
 
-        
-        $posts_update->update([
-           'title' => $request->title
-        ]);
-        return redirect()->back();
+        // Lưu ảnh mới
+        $imagePath = $request->file('image')->store('images', 'public');
     }
+
+    // ✅ Cập nhật dữ liệu bài viết
+    $post->update([
+        'user_id'       => auth()->id(),
+        'category_id'   => $request->category_id,
+        'title'         => $request->title,
+        'slug'          => $request->slug ?? Str::slug($request->title),
+        'excerpt'       => $request->excerpt,
+        'content'       => $request->content,
+        'image'         => $imagePath,
+        'views'         => $post->views ?? 0, // giữ nguyên nếu không reset
+        'is_published'  => $request->has('is_published') ? 1 : 0,
+        'published_at'  => $request->published_at ?? now(),
+    ]);
+
+    return redirect()->back()->with('success', 'Cập nhật bài viết thành công!');
+}
 
     public function delete ($id) {
         $posts = Post::findOrfail($id);

@@ -16,7 +16,7 @@
 
 			<div class="p-header-logo p-header-logo--image">
 				<a href="../../index.html">
-					<img src="../../styles/vipcorel.png"
+					<img src="css/styles/vipcorel.png"
 						alt="VIPcorel.com - Thư viện mẫu thiết kế đồ họa CorelDRAW (CDR)."
 						 />
 				</a>
@@ -56,7 +56,7 @@
 
 			<div class="p-nav-smallLogo">
 				<a href="../../index.html">
-					<img src="../../styles/vipcorel.png"
+					<img src="css/styles/vipcorel.png"
 						alt="VIPcorel.com - Thư viện mẫu thiết kế đồ họa CorelDRAW (CDR)."
 					 />
 				</a>
