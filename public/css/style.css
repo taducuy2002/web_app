@@ -1,0 +1,277 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #000;
+  color: #fff;
+}
+li{
+    list-style-type: none;
+}
+.container {
+  width: 100%;
+  max-width: 2200px;
+  margin: 0 auto;
+}
+
+/* HEADER */
+header {
+  width: 100%;
+  background-color: #000;
+}
+
+.menu-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  padding: 0 40px;
+}
+
+/* ===== MENU TRÁI ===== */
+.menu-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 40%;
+}
+
+.menu-1 a {
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+/* Ô tìm kiếm */
+.menu-2 form {
+  display: flex;
+  align-items: center;
+  background-color: #2b2b2b;
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+.menu-2 input[type="text"] {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #fff;
+  padding: 8px 12px;
+  width: 180px;
+  font-style: italic;
+}
+
+.menu-2 input[type="submit"] {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 8px 12px;
+  font-size: 16px;
+}
+
+.menu-2 input[type="submit"]::before {
+  content: "\f002"; /* icon search */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+}
+
+/* Nút danh mục */
+
+.menu-3 a {
+  background-color: #e60073;
+  color: #fff;
+  border-radius: 20px;
+  padding: 8px 16px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* ===== MENU GIỮA ===== */
+.menu-center {
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+ 
+}
+
+.menu-center h3 {
+  background-color: #007b7f;
+  padding: 8px 16px;
+  border-radius: 10px;
+  color: #fff;
+  margin-right: 100px;
+}
+
+/* ===== MENU PHẢI ===== */
+.menu-right {
+  width: 30%;
+  text-align: right;
+  font-weight: bold;
+  display: flex;
+  justify-content: flex-end;
+  gap: 30px;
+   a{
+    text-decoration: none;
+    color: #fff;
+   }
+   a:hover{
+    color: #e60073;
+   }
+
+}
+
+/* ===== SLICE VÀ BANNER ===== */
+.slice {
+  width: 100%;
+  /* height: 30px; */
+  background-color: rgb(95, 84, 74);
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  color: #fff; /* chữ trắng */
+  padding: 10px 0;
+  font-weight: bold;
+  position: relative;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 15px;
+  color: rgb(243, 241, 246);
+}
+.slice span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee 20s linear infinite;
+}
+
+/* Hiệu ứng chạy */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+.banner {
+  width: 100%;
+  height: 300px;
+  overflow: hidden; /* ẩn phần thừa khi zoom */
+}
+
+.banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;                 /* vẫn phủ kín banner */
+  image-rendering: -webkit-optimize-contrast; /* giữ nét trên Chrome */
+  image-rendering: crisp-edges;               /* ưu tiên hiển thị rõ */
+  image-rendering: high-quality;              /* thử thêm */
+  transform: translateZ(0);                   /* tránh mờ do GPU */
+  filter: none;                               /* đảm bảo không bị blur */
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 992px) {
+  .menu-banner {
+    flex-wrap: wrap;
+    justify-content: center;
+    height: auto;
+    padding: 10px;
+  }
+  .menu-left, .menu-center, .menu-right {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .menu-2 input[type="text"] {
+    width: 120px;
+  }
+}
+footer{
+    padding-bottom: 20px;
+    padding-top: 20px;
+    text-align: center;
+}
+.menu-right,
+.user-menu {
+  position: relative;
+  overflow: visible !important;
+  z-index: 10000;
+}
+
+/* Tên người dùng */
+.user-name {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 8px 12px;
+  display: inline-block;
+  cursor: pointer;
+  position: relative;
+  z-index: 10001;
+  line-height: 1;
+}
+
+/* Menu thả xuống */
+.dropdown-menu {
+  position: absolute; /* tách khỏi luồng, không làm dãn bố cục */
+  top: 100%;          /* sát ngay dưới tên user */
+  right: 0;
+  background: #222;
+  border-radius: 8px;
+  min-width: 180px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+  padding: 6px 0;
+  opacity: 0;
+  transform: translateY(-5px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  visibility: hidden;
+  z-index: 10002;
+  pointer-events: none;
+  position: fixed; /* 🧩 tách hẳn khỏi flow — KHÔNG làm giãn layout */
+}
+
+/* Mục trong menu */
+.dropdown-menu li {
+  list-style: none;
+  white-space: nowrap;
+}
+
+.dropdown-menu a,
+.dropdown-menu .logout-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 8px 14px;
+  background: none;
+  border: none;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  font-size: 15px;
+}
+
+/* Hover chỉ đổi màu chữ */
+.dropdown-menu a:hover,
+.dropdown-menu .logout-btn:hover {
+  color: #ff9800;
+  background: none;
+}
+
+/* Khi hover thì hiện menu */
+.user-menu:hover .dropdown-menu,
+.user-menu:focus-within .dropdown-menu {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  pointer-events: auto;
+}
+html, body {
+  width: 100%;
+  overflow-x: hidden; /* Ẩn thanh cuộn ngang */
+}

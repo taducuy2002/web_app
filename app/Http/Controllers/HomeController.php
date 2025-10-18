@@ -47,7 +47,7 @@ class HomeController extends Controller
         $posts_create_at = Post::orderBy('created_at', 'desc')->take(10)->get();
         // bài viết ngẫu nhiên
          $posts_random = Post::inRandomOrder()->take(10)->get();
-        return view('client.home.home', compact('posts','categories', 'latestPosts', 'stats', 'newestMember', 'newestMembers', 'breadcrumbs','posts_create_at','posts_random'));
+        return view('webapp.web.home', compact('posts','categories', 'latestPosts', 'stats', 'newestMember', 'newestMembers', 'breadcrumbs','posts_create_at','posts_random'));
     }
 
     // Bài viết mới

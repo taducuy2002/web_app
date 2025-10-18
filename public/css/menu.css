@@ -1,0 +1,127 @@
+/* ===== Fix dropdown + không ảnh hưởng form ===== */
+/* đảm bảo vùng chứa không cắt menu con */
+.menu-banner,
+.menu-left,
+.menu-center,
+.menu-right {
+  overflow: visible !important;
+}
+
+/* menu-2 (form search) không nên có overflow:hidden */
+.menu-2 {
+  overflow: visible !important;
+}
+
+/* menu cha */
+.menu-3 {
+  position: relative;
+  display: inline-block;
+  z-index: 20000; /* đủ cao để đứng trên form, banner... */
+}
+
+/* nút chính */
+.menu-3 > a {
+  background-color: #e60073;
+  color: #fff;
+  border-radius: 20px;
+  padding: 8px 16px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* MENU CẤP 1 (dropdown) - dùng visibility/opacity để animation + tránh bị cắt */
+.dropdown-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 220px;
+  background-color: #111;
+  border-radius: 8px;
+  padding: 6px 0;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  z-index: 21000;
+  pointer-events: auto;
+
+  /* animation-friendly state (ẩn bằng visibility/opacity, không display:none) */
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s linear 0.18s;
+}
+
+/* hiển thị dropdown khi hover/focus (cho keyboard) */
+.menu-3:hover > .dropdown-menu,
+.menu-3:focus-within > .dropdown-menu {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0s;
+}
+
+/* item trong dropdown */
+.dropdown-menu li {
+  position: relative;
+  padding: 6px 16px;
+}
+.dropdown-menu li a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  font-size: 15px;
+}
+.dropdown-menu li a:hover {
+  background-color: #e60073;
+  border-radius: 5px;
+}
+
+/* SUBMENU (cấp 2) */
+.submenu {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  margin-left: 8px;
+  min-width: 200px;
+  background: #111;
+  border-radius: 6px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  z-index: 22000;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 0.18s ease, transform 0.18s ease, visibility 0s linear 0.18s;
+}
+
+/* hiện submenu khi hover/focus vào mục cha */
+.has-submenu:hover > .submenu,
+.has-submenu:focus-within > .submenu {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0s;
+}
+
+/* reset nếu có transform/filter gây stacking context */
+header, .container, .menu-banner {
+  transform: none !important;
+  filter: none !important;
+}
+
+/* đảm bảo các phần tử form vẫn nhận sự kiện chuột */
+.menu-2 input,
+.menu-2 button,
+.menu-2 form {
+  pointer-events: auto;
+}
+
+/* responsive: nếu trên mobile bạn muốn click để mở, cân nhắc chuyển sang JS */
+@media (max-width: 768px) {
+  .dropdown-menu, .submenu {
+    position: static;
+    transform: none;
+    visibility: visible;
+    opacity: 1;
+    box-shadow: none;
+  }
+}

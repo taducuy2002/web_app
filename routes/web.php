@@ -22,6 +22,8 @@ use App\Http\Controllers\Admin\AttachmentController as AdminAttachmentController
 use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\ThemeAssetController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\LoginFacebookController;
+use App\Http\Controllers\LoginGoogleController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/theme', [ThemeController::class, 'home'])->name('theme.home');
@@ -48,7 +50,13 @@ Route::get('/login', [AuthController::class, 'showLogin'])->name('login.show');
 Route::post('/login', [AuthController::class, 'login'])->name('login.perform');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+// Tài khoản google
+Route::get('auth/google', [LoginGoogleController::class, 'redirectToGoogle'])->name('login.google');
+Route::get('auth/google/callback', [LoginGoogleController::class, 'handleGoogleCallback']);
 
+// Tài khoản facebook
+Route::get('auth/facebook', [LoginFacebookController::class, 'redirectToFacebook'])->name('login.facebook');
+Route::get('auth/facebook/callback', [LoginFacebookController::class, 'handleFacebookCallback']);
 
 Route::middleware(['auth','admin'])->group(function () {
    

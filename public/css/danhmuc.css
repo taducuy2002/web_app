@@ -1,0 +1,43 @@
+.category-section {
+  background-color: #121212; /* nền đen xám */
+  padding: 20px 0;
+}
+
+.category-container {
+  display: flex;
+  flex-wrap: wrap;          /* tự xuống hàng khi tràn */
+  justify-content: center;  /* căn giữa toàn bộ */
+  gap: 10px 15px;           /* khoảng cách giữa các nút */
+  padding: 0 20px;
+}
+
+.category-item {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px solid #fff;
+  border-radius: 999px;     /* bo tròn hoàn toàn */
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+/* Hover hiệu ứng */
+.category-item:hover {
+  background-color: #e91e63; /* màu hồng */
+  border-color: #e91e63;
+  color: #fff;
+}
+
+/* Mục đang active */
+.category-item.active {
+  background-color: #e91e63;
+  border-color: #e91e63;
+  color: #fff;
+}
+.category-container {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
+    justify-content: flex-start;
+}

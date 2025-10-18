@@ -1,4 +1,49 @@
 <footer class="p-footer" id="footer">
+	<style>
+		:root {
+			--primary-color: #ff8c00; /* orange */
+			--primary-color-dark: #cc7000;
+		}
+
+		/* Footer background and text */
+		#footer,
+		#footer .p-footer-inner,
+		#footer .p-footer-row,
+		#footer .p-footer-copyright {
+			background-color: var(--primary-color);
+			color: #fff;
+		}
+
+		/* Footer links */
+		#footer a { color: #fff; }
+		#footer a:hover { color: #ffe0b3; }
+
+		/* Footer icons */
+		#footer .p-footer-rssLink .fa--xf,
+		#footer .fa--xf { color: #fff; }
+
+		/* Divider */
+		#footer hr { border-color: rgba(255,255,255,0.25); }
+
+		/* Buttons in footer notices */
+		#footer .button,
+		#footer .button--notice,
+		#footer .button--notice.button--icon--confirm {
+			background-color: var(--primary-color);
+			border-color: var(--primary-color);
+			color: #fff;
+		}
+		#footer .button:hover,
+		#footer .button--notice:hover,
+		#footer .button--notice.button--icon--confirm:hover {
+			background-color: var(--primary-color-dark);
+			border-color: var(--primary-color-dark);
+		}
+
+		/* Misc text blocks in footer content */
+		#footer #content b,
+		#footer #content li { color: #fff; }
+	</style>
 	<div class="p-footer-inner">
 
 		<div class="p-footer-row">

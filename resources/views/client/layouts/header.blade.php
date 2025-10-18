@@ -29,7 +29,7 @@
 	<meta property="og:title" content="VIPcorel.com - Thư viện mẫu thiết kế đồ họa CorelDRAW (CDR)." />
 	<meta property="twitter:title" content="VIPcorel.com - Thư viện mẫu thiết kế đồ họa CorelDRAW (CDR)." />
 	<meta property="og:url" content="{{ asset('index.html') }}" />
-	<meta name="theme-color" content="rgb(24, 88, 134)" />
+	<meta name="theme-color" content="rgb(255, 140, 0)" />
 
 	<!-- Fonts -->
 	<link rel="preload" href="{{ asset('css/styles/fonts/fa/fa-regular-400fcba.woff2?_v=5.15.3') }}" as="font" type="font/woff2" crossorigin="anonymous" />
@@ -39,6 +39,21 @@
 	<!-- CSS -->
 	<link rel="stylesheet" href="{{ asset('css/css4024.css?css=public%3Anormalize.css%2Cpublic%3Afa.css%2Cpublic%3Acore.less%2Cpublic%3Aapp.less&s=2&l=2&d=1752885637&k=fe537a0ccd3ce0e6910e30eca1f8726b9bf010f9') }}" />
 	<link rel="stylesheet" href="{{ asset('css/css3375.css?css=public%3AEWRporta.less%2Cpublic%3AEWRporta_articles.less%2Cpublic%3AVNXF_Statistics_threads_widget.less%2Cpublic%3Aextra_footer.less%2Cpublic%3Alightbox.less%2Cpublic%3Anode_list.less%2Cpublic%3Anotices.less%2Cpublic%3Aextra.less&s=2&l=2&d=1752885637&k=96a1d49074f902dd95392cc840a73cac43896ff4') }}" />
+	<link rel="stylesheet" href="{{ asset('css/theme-orange.css') }}" />
+
+	<style>
+		:root { --primary-color: #ff8c00; --primary-color-dark: #cc7000; }
+
+		/* Limit overrides to layout chrome only */
+		.p-header,
+		.p-nav,
+		.p-sectionLinks { background-color: var(--primary-color); }
+		.p-nav .p-nav-opposite .p-navgroup-link,
+		.p-nav .p-navEl.is-selected .p-navEl-link,
+		.p-nav .p-navEl-link:hover { color: #fff; }
+		.tabs--standalone .tabs-tab.is-active,
+		.block-header { background-color: var(--primary-color); border-color: var(--primary-color); color: #fff; }
+	</style>
 
 	<style>
 		.blockbody .VNXF_Stats:nth-child(1n) {

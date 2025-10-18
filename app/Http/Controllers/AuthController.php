@@ -13,7 +13,7 @@ class AuthController extends Controller
 {
 	public function showRegister(): View
 	{
-		return view('client.user.register');
+		return view('webapp.user.login');
 	}
 
 	public function register(Request $request): RedirectResponse
@@ -30,14 +30,15 @@ class AuthController extends Controller
 			'email' => $validated['email'],
 			'password' => Hash::make($validated['password']),
 		]);
+		// dd($request->all());
 
 		Auth::login($user, true);
 		return redirect()->route('home');
 	}
 
-	public function showLogin(): View
+	public function showLogin()
 	{
-		return view('client.user.login');
+		return view('webapp.user.login');
 	}
 
 	public function login(Request $request): RedirectResponse
