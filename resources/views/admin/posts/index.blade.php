@@ -12,7 +12,7 @@
           <th>Tiêu đề</th>
            <th>Hình ảnh</th>
            <th>Nội dung</th>
-          <th>Ngày tạo</th>
+          <th>Danh mục</th>
           <th>Thao tác</th>
         </tr>
       </thead>
@@ -31,7 +31,7 @@
 </td>
 
             <td>{{ $post->content }}</td>
-            <td>{{ $post->created_at->format('d/m/Y H:i') }}</td>
+           <td>{{ $post->category->name ?? 'Chưa có danh mục' }}</td>
             <td>
               <a href="{{route('admin.edit', $post->id)}}" class= "btn btn-warning">Sửa</a>
               <form action="{{route('admin.delete', $post->id)}}" method="post" enctype="multipart/form-data">

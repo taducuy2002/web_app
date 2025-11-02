@@ -67,6 +67,10 @@ class AuthController extends Controller
 		$request->session()->regenerateToken();
 		return redirect()->route('home');
 	}
+	protected function redirectTo() {
+    $redirect = request('redirect_after_login') ?: route('home');
+    return $redirect;
+}
 }
 
 

@@ -16,7 +16,7 @@ class PostController extends Controller
     }
 
     public function create() {
-        $categories = Category::all();
+        $categories = Category::with('children')->whereNull('paren_id')->get();
         return view('admin.posts.create', compact('categories'));
     }
     public function store(Request $request)
@@ -41,7 +41,6 @@ class PostController extends Controller
             'user_id'       => auth()->id(), // nếu có user đăng nhập
             'category_id'   => $request->category_id,
             'title'         => $request->title,
-            'slug'          => $request->slug ?? Str::slug($request->title),
             'excerpt'       => $request->excerpt,
             'content'       => $request->content,
             'image'         => $imagePath, // chỉ lưu đường dẫn ảnh
@@ -56,12 +55,14 @@ class PostController extends Controller
     }
 
     public function edit($id) {
+         $categories = Category::with('children')->whereNull('paren_id')->get();
         $posts = Post::find($id);
-        return view ('admin.posts.edit', compact('posts'));
+        return view ('admin.posts.edit', compact('posts','categories'));
     }
 
   public function update(Request $request, $id)
 {
+    $categories = Category::all();
     $post = Post::findOrFail($id);
 
     // ✅ Sửa lỗi chính tả 'tile' → 'title'
@@ -90,7 +91,6 @@ class PostController extends Controller
         'user_id'       => auth()->id(),
         'category_id'   => $request->category_id,
         'title'         => $request->title,
-        'slug'          => $request->slug ?? Str::slug($request->title),
         'excerpt'       => $request->excerpt,
         'content'       => $request->content,
         'image'         => $imagePath,

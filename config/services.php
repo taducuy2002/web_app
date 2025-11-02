@@ -41,9 +41,9 @@ return [
     ],
      'facebook' => [
 
-        'client_id' => '1066662411679-4idjhphqu3o9rdsi04im053bgvmnukgb.apps.googleusercontent.com',
+        'client_id' => '1240102538157658',
 
-        'client_secret' => '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',
+        'client_secret' => '487ed2d34de07cbcecc8e46e5399a38e',
 
         'redirect' => env('APP_URL'). '/auth/facebook/callback',
 

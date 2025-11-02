@@ -23,25 +23,28 @@
                     @enderror
                 </div>
 
-                {{-- Slug --}}
+                <!-- {{-- Slug --}}
                 <div class="mb-3">
                     <label for="slug" class="form-label">Slug</label>
                     <input type="text" id="slug" name="slug" 
                            class="form-control" value="{{ old('slug') }}">
-                </div>
-
-                <!-- {{-- Danh mục --}}
-                <div class="mb-3">
-                    <label for="category_id" class="form-label">Danh mục</label>
-                    <select id="category_id" name="category_id" class="form-select">
-                        <option value="">-- Chọn --</option>
-                        @foreach($categories as $c)
-                            <option value="{{ $c->id }}" {{ old('category_id') == $c->id ? 'selected' : '' }}>
-                                {{ $c->name }}
-                            </option>
-                        @endforeach
-                    </select>
                 </div> -->
+
+                {{-- Danh mục --}}
+               <div class="mb-3">
+    <label for="category_id" class="form-label">Danh mục</label>
+    <select id="category_id" name="category_id" class="form-select">
+        <option value="">-- Chọn danh mục --</option>
+        @foreach($categories as $parent)
+            <option value="{{ $parent->id }}">{{ $parent->name }}</option>
+            @if($parent->children && $parent->children->count() > 0)
+                @foreach($parent->children as $child)
+                    <option value="{{ $child->id }}">— {{ $child->name }}</option>
+                @endforeach
+            @endif
+        @endforeach
+    </select>
+</div>
 
                 {{-- Ảnh đại diện --}}
                 <div class="mb-3">
@@ -61,21 +64,21 @@
                     <textarea id="content" name="content" class="form-control" rows="8">{{ old('content') }}</textarea>
                 </div>
 
-                {{-- Xuất bản --}}
+                <!-- {{-- Xuất bản --}}
                 <div class="form-check mb-3">
                     <input class="form-check-input" type="checkbox" id="is_published" name="is_published" value="1" checked>
                     <label class="form-check-label" for="is_published">
                         Xuất bản ngay
                     </label>
-                </div>
+                </div> -->
 
-                {{-- Ngày đăng --}}
+                <!-- {{-- Ngày đăng --}}
                 <div class="mb-3">
                     <label for="published_at" class="form-label">Ngày đăng</label>
                     <input type="datetime-local" id="published_at" name="published_at" 
                            class="form-control"
                            value="{{ old('published_at', now()->format('Y-m-d\TH:i')) }}">
-                </div>
+                </div> -->
 
                 {{-- Nút lưu --}}
                 <div class="d-flex justify-content-end">

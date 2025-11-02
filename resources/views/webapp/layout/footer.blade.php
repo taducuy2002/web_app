@@ -3,5 +3,6 @@
          </footer>
     </div>
 </body>
-
+ <script src="{{asset('js/style.js')}}"></script>
+ <script src="{{asset('js/script.js')}}"></script>
 </html>

@@ -52,12 +52,12 @@
 
                 <div class="line"></div>
 
-                <div class="media-options">
+                <!-- <div class="media-options">
                     <a href="{{route('login.facebook')}}" class="field facebook">
                         <i class='bx bxl-facebook facebook-icon'></i>
                         <span>Đăng nhập bằng Facebook</span>
                     </a>
-                </div>
+                </div> -->
 
                 <div class="media-options">
                     <a href="{{route('login.google')}}" class="field google">
@@ -103,12 +103,12 @@
 
                 <div class="line"></div>
 
-                <div class="media-options">
+                <!-- <div class="media-options">
                     <a href="{{route('login.facebook')}}" class="field facebook">
                         <i class='bx bxl-facebook facebook-icon'></i>
                         <span>Đăng nhập bằng Facebook</span>
                     </a>
-                </div>
+                </div> -->
 
                 <div class="media-options">
                     <a href="{{route('login.google')}}" class="field google">

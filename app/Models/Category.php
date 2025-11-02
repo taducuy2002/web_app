@@ -11,18 +11,23 @@ class Category extends Model
 	use HasFactory;
 
 	protected $fillable = [
-    'title',
-    'slug',
-    'excerpt',
-    'content',
-    'image',
-    'description',
+    'name',
+    'paren_id'
 ];
 
 	public function posts(): HasMany
 	{
-		return $this->hasMany(Post::class);
+		return $this->hasMany(Post::class, 'category_id');
 	}
+
+    public function parent () {
+        return $this->belongsTo(Category::class,'paren_id');
+    }
+
+    public function children () {
+        return $this->hasMany(Category::class,'paren_id');
+    }
+
 }
 
 

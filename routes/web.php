@@ -19,17 +19,18 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\DasbostController as AdminDasbostController;
 use App\Http\Controllers\Admin\PostController as AdminPostController;
 use App\Http\Controllers\Admin\AttachmentController as AdminAttachmentController;
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\ThemeAssetController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LoginFacebookController;
 use App\Http\Controllers\LoginGoogleController;
+use App\Http\Controllers\ImageController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/theme', [ThemeController::class, 'home'])->name('theme.home');
 Route::get('/theme-asset/{path}', ThemeAssetController::class)->where('path', '.*')->name('theme.asset');
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
-Route::get('/search', [PostController::class, 'search'])->name('search');
 Route::view('/contact', 'pages.contact')->name('contact');
 Route::view('/terms', 'pages.terms')->name('terms');
 Route::view('/privacy', 'pages.privacy')->name('privacy');
@@ -38,10 +39,11 @@ Route::get('/category/{slug}', [PostController::class, 'category'])->name('categ
 Route::get('/post/{slug}', [PostController::class, 'show'])->name('post.show');
 Route::post('/post/{postId}/comments', [PostController::class, 'storeComment'])->name('post.comment.store');
 Route::get('/download/{attachmentId}', [PostController::class, 'downloadAttachment'])->name('attachment.download');
+Route::post('/download-image', [ImageController::class, 'download'])->name('image.download');
 
 
 // client
-Route::get('/detail', [HomeController::class, 'detail'])->name('detail');
+Route::get('/detail/{id}', [HomeController::class, 'postCategory'])->name('detail');
 
 // Auth routes
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register.show');
@@ -57,6 +59,12 @@ Route::get('auth/google/callback', [LoginGoogleController::class, 'handleGoogleC
 // Tài khoản facebook
 Route::get('auth/facebook', [LoginFacebookController::class, 'redirectToFacebook'])->name('login.facebook');
 Route::get('auth/facebook/callback', [LoginFacebookController::class, 'handleFacebookCallback']);
+
+// Tìm kiếm
+Route::get('/search', [HomeController::class, 'search'])->name('search');
+
+// Mua vip
+Route::get('/muavip', [HomeController::class, 'vip'])->name('vip');
 
 Route::middleware(['auth','admin'])->group(function () {
    
@@ -83,6 +91,14 @@ Route::middleware(['auth','admin'])->group(function () {
     Route::post('/admin/users/{user}/upgrade', [AdminUserController::class, 'upgrade'])->name('users.upgrade');
     Route::post('/admin/users/{user}/upgrade-admin', [AdminUserController::class, 'upgradeAdmin'])->name('users.admin');
 
+
+    // Danh mục 
+      Route::get('/category', [AdminCategoryController::class, 'index'])->name('cate.index');
+      Route::get('/category/create', [AdminCategoryController::class, 'create'])->name('cate.create');
+      Route::post('/category/store', [AdminCategoryController::class, 'store'])->name('cate.store');
+      Route::get('/category/edit/{id}', [AdminCategoryController::class, 'edit'])->name('cate.edit');
+      Route::post('/category/update/{id}', [AdminCategoryController::class, 'update'])->name('cate.update');
+      Route::delete('/category/delete/{id}', [AdminCategoryController::class, 'delete'])->name('cate.delete');
     }) ;
 }) ;
     

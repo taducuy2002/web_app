@@ -6,7 +6,7 @@
 <div class="container mt-4">
     <div class="card shadow-sm">
         <div class="card-header bg-primary text-white">
-            <h5 class="mb-0">Thêm bài viết</h5>
+            <h5 class="mb-0">Sửa bài viết</h5>
         </div>
         <div class="card-body">
             <form method="POST" action="{{ route('admin.update', $posts->id) }}" enctype="multipart/form-data">
@@ -23,12 +23,37 @@
                     @enderror
                 </div>
 
-                {{-- Slug --}}
+                <!-- {{-- Slug --}}
                 <div class="mb-3">
                     <label for="slug" class="form-label">Slug</label>
                     <input type="text" id="slug" name="slug" 
                            class="form-control" value="{{ old('slug' , $posts->slug) }}">
-                </div>
+                </div> -->
+
+
+                <div class="mb-3">
+    <label for="category_id" class="form-label">Danh mục</label>
+    <select id="category_id" name="category_id" class="form-select">
+        <option value="">-- Chọn danh mục --</option>
+        @foreach($categories as $parent)
+            {{-- Danh mục cha --}}
+            <option value="{{ $parent->id }}"
+                {{ old('category_id', $posts->category_id ?? '') == $parent->id ? 'selected' : '' }}>
+                {{ $parent->name }}
+            </option>
+
+            {{-- Danh mục con --}}
+            @if($parent->children)
+                @foreach($parent->children as $child)
+                    <option value="{{ $child->id }}"
+                        {{ old('category_id', $posts->category_id ?? '') == $child->id ? 'selected' : '' }}>
+                        — {{ $child->name }}
+                    </option>
+                @endforeach
+            @endif
+        @endforeach
+    </select>
+</div>
 
                
 
@@ -55,7 +80,7 @@
                     <label for="content" class="form-label">Nội dung</label>
                     <textarea id="content" name="content" class="form-control" rows="8">{{ old('content', $posts->content) }}</textarea>
                 </div>
-
+<!-- 
                 {{-- Xuất bản --}}
                 <div class="form-check mb-3">
                     <input class="form-check-input" type="checkbox" id="is_published" name="is_published" value="1" checked>
@@ -70,7 +95,7 @@
                     <input type="datetime-local" id="published_at" name="published_at" 
                            class="form-control"
                            value="{{ old('published_at', now()->format('Y-m-d\TH:i')) }}">
-                </div>
+                </div> -->
 
                 {{-- Nút lưu --}}
                 <div class="d-flex justify-content-end">

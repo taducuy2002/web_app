@@ -1,0 +1,103 @@
+
+       <div class="vip-container">
+    <div class="vip-card">
+        <h3 class="vip-title">GÓI VIP 6 THÁNG<br><span>299.000₫</span></h3>
+        <ul class="vip-benefits">
+            <li>✔️ Tăng tốc tải ảnh</li>
+            <li>✔️ Không quảng cáo</li>
+            <li>✔️ Xem không giới hạn</li>
+            <li>✔️ Ưu tiên hỗ trợ</li>
+        </ul>
+        <a href="#" class="vip-btn">MUA NGAY</a>
+    </div>
+
+    <div class="vip-card">
+        <h3 class="vip-title">GÓI 1 NĂM<br><span>599.000₫</span></h3>
+        <ul class="vip-benefits">
+            <li>✔️ Tất cả quyền lợi gói 6 tháng</li>
+            <li>✔️ Giảm 20% khi gia hạn</li>
+            <li>✔️ Ưu tiên cao nhất</li>
+            <li>✔️ Hỗ trợ 24/7</li>
+        </ul>
+        <a href="#" class="vip-btn">MUA NGAY</a>
+    </div>
+</div>
+
+<style>
+.vip-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 50px;
+    flex-wrap: wrap;
+    padding: 80px 0;
+    background: #3d3d3dff;
+}
+
+.vip-card {
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    border-top: 12px solid #e91e63;
+    width: 360px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.vip-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.vip-title {
+    background-color: #e91e63;
+    color: #fff;
+    font-size: 26px;
+    font-weight: 700;
+    padding: 30px 15px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    line-height: 1.4;
+}
+
+.vip-title span {
+    font-size: 32px;
+    font-weight: 700;
+    display: block;
+    margin-top: 10px;
+}
+
+.vip-benefits {
+    list-style: none;
+    padding: 30px 40px 20px 40px;
+    margin: 0;
+    text-align: left;
+    color: #333;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.vip-benefits li {
+    margin: 12px 0;
+}
+
+.vip-btn {
+    display: inline-block;
+    margin: 20px 0 40px 0;
+    background-color: #e91e63;
+    color: #fff;
+    text-decoration: none;
+    padding: 14px 40px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.vip-btn:hover {
+    background-color: #c2185b;
+    transform: scale(1.05);
+}
+</style>
+
+</style>

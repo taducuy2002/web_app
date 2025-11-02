@@ -13,46 +13,56 @@ class CategoryController extends Controller
 {
 	public function index(): View
 	{
-		$categories = Category::query()->orderBy('name')->paginate(20);
-		return view('admin.categories.index', compact('categories'));
+		$categories = Category::whereNull('paren_id')->get();
+		return view('admin.category.index', compact('categories'));
 	}
 
 	public function create(): View
 	{
-		return view('admin.categories.create');
+		 $categories = Category::whereNull('paren_id')->get();
+		return view('admin.category.create', compact('categories'));
 	}
 
 	public function store(Request $request): RedirectResponse
 	{
 		$data = $request->validate([
 			'name' => ['required', 'string', 'max:255'],
-			'slug' => ['nullable', 'string', 'max:255', 'unique:categories,slug'],
-			'description' => ['nullable', 'string'],
+			
 		]);
 
-		$data['slug'] = $data['slug'] ?: Str::slug($data['name']);
-		Category::create($data);
-		return redirect()->route('admin.categories.index');
+		Category::create([
+			'name' => $request->name,
+			'paren_id' => $request->paren_id,
+		]);
+		return redirect()->route('cate.index');
 	}
 
-	public function edit(Category $category): View
-	{
-		return view('admin.categories.edit', compact('category'));
-	}
+	public function edit($id)
+{
+    $category = Category::findOrFail($id); // danh mục cần sửa
+    $categories = Category::whereNull('paren_id')->where('id', '!=', $id)->get(); // danh sách danh mục cha, loại bỏ chính nó
+    return view('admin.category.edit', compact('category', 'categories'));
+}
 
-	public function update(Request $request, Category $category): RedirectResponse
+
+	public function update(Request $request, $id)
 	{
-		$data = $request->validate([
+		$data = Category::findOrFail($id);
+		$request->validate([
 			'name' => ['required', 'string', 'max:255'],
-			'slug' => ['required', 'string', 'max:255', 'unique:categories,slug,' . $category->id],
-			'description' => ['nullable', 'string'],
+			
 		]);
-		$category->update($data);
-		return redirect()->route('admin.categories.index');
+
+		$data->update([
+			'name' => $request->name,
+			'paren_id' => $request->paren_id,
+		]);
+		return redirect()->route('cate.index');
 	}
 
-	public function destroy(Category $category): RedirectResponse
+	public function delete($id)
 	{
+		$category = Category::findOrFail($id);
 		$category->delete();
 		return back();
 	}

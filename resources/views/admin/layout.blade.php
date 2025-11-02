@@ -65,6 +65,9 @@
       <li class="nav-item">
         <a href="{{ route('admin.post') }}" class="nav-link">Bài viết</a>
       </li>
+       <li class="nav-item">
+        <a href="{{ route('cate.index') }}" class="nav-link">Danh mục</a>
+      </li>
     </ul>
   </div>
 

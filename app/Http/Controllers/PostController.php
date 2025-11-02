@@ -198,9 +198,12 @@ class PostController extends Controller
 		]);
 	}
 
-	// Thêm mới 
-	public function form () {
-		
+	// lọc theo danh mucj
+	public function postCategory ($id) {
+		$categories = Category::findOrFail($id);
+		$products = $categories->products()->paginate(12);
+
+		return view('webapp.web.detail', compact('categories', 'products'));
 	}
 }
 
